@@ -1,5 +1,8 @@
 using AutoMapper;
 using Library.Models.DTO.Models.Book;
+using Library.Models.DTO.Requests;
+using Library.Models.DTO.Responses;
+using LibraryAPI.Commands.Books;
 using LibraryAPI.Queries.Books;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +27,14 @@ namespace LibraryAPI.Controllers
         {
             var query = new GetBooksQuery();
             var result = await _sender.Send(query);
+            return result;
+        }
+
+        [HttpPost("AddBook")]
+        public async Task<AddBookResponseDTO> PostBook(AddBookRequestDTO requestDTO)
+        {
+            var command = _mapper.Map<AddBookRequestDTO, AddBookCommand>(requestDTO);
+            var result = await _sender.Send(command);
             return result;
         }
     }
