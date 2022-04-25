@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Clients\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Library.Models\Library.Models.csproj" />
   </ItemGroup>
 

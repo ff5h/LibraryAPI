@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using Library.Models.DTO.Models.Client;
+using Library.Models.DTO.Requests;
+using Library.Models.DTO.Responses;
+using LibraryAPI.Commands.Clients;
 using LibraryAPI.Queries.Clients;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -26,5 +29,14 @@ namespace LibraryAPI.Controllers
             var result = await _sender.Send(query);
             return result;
         }
+
+        [HttpPost("AddClient")]
+        public async Task<AddClientResponseDTO> PostClient(AddClientRequestDTO requestDTO)
+        {
+            var command = _mapper.Map<AddClientRequestDTO, AddClientCommand>(requestDTO);
+            var result = await _sender.Send(command);
+            return result;
+        }
+
     }
 }
