@@ -3,6 +3,7 @@ using LibraryAPI.Commands.Clients;
 using LibraryAPI.Data;
 using LibraryAPI.Data.Models;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryAPI.Handlers.Clients
 {
@@ -17,11 +18,9 @@ namespace LibraryAPI.Handlers.Clients
 
         public async Task<DeleteClientResponseDTO> Handle(DeleteClientCommand request, CancellationToken cancellationToken)
         {
-            var client = new Client()
-            {
-                Id = request.Id,
-            };
-
+            var clientsQuery = _ctx.Clients.AsQueryable();
+            clientsQuery = clientsQuery.Where(c => c.Id == request.Id);
+            var client = await clientsQuery.FirstOrDefaultAsync();
             _ctx.Clients.Remove(client);
             await _ctx.SaveChangesAsync();
             var result = new DeleteClientResponseDTO()
