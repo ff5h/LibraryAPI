@@ -1,3 +1,5 @@
+using LibraryAPI.Data;
+
 namespace LibraryAPI
 {
     public class Program
@@ -11,6 +13,7 @@ namespace LibraryAPI
 
         var app = builder.Build();
         startup.Configure(app, app.Environment);
+        startup.InitializeDatabase(app.Services.GetService<AppDBContext>());
         app.Run();
     }
 }

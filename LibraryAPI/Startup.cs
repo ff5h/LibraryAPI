@@ -42,5 +42,10 @@ namespace LibraryAPI
                 endpoints.MapControllers();
             });
         }
+
+        public void InitializeDatabase(AppDBContext ctx)
+        {
+            ctx.Database.Migrate();
+        }
     }
 }
