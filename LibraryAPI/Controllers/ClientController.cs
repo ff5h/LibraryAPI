@@ -38,5 +38,12 @@ namespace LibraryAPI.Controllers
             return result;
         }
 
+        [HttpDelete("DeleteClient")]
+        public async Task<DeleteClientResponseDTO> DeleteClient(DeleteClientRequestDTO requestDTO)
+        {
+            var command = _mapper.Map<DeleteClientRequestDTO, DeleteClientCommand>(requestDTO); ;
+            var result = await _sender.Send(command);
+            return result;
+        }
     }
 }
