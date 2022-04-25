@@ -15,7 +15,6 @@ namespace LibraryAPI.Handlers.Books
         {
             _ctx = ctx;
         }
-
         public async Task<AddBookResponseDTO> Handle(AddBookCommand request, CancellationToken cancellationToken)
         {
             var book = new Book()

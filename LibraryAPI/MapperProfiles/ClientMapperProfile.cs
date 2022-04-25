@@ -13,7 +13,7 @@ namespace LibraryAPI.MapperProfiles
         {
             CreateMap<Client, ClientDTO>();
             CreateMap<AddClientRequestDTO, AddClientCommand>();
-            CreateMap<DeleteClientResponseDTO, DeleteClientCommand>();
+            CreateMap<DeleteClientRequestDTO, DeleteClientCommand>();
         }
     }
 }

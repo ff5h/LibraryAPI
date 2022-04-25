@@ -1,6 +1,7 @@
 ﻿using Library.Models.DTO.Responses;
 using LibraryAPI.Commands.Clients;
 using LibraryAPI.Data;
+using LibraryAPI.Data.Models;
 using MediatR;
 
 namespace LibraryAPI.Handlers.Clients
@@ -14,14 +15,14 @@ namespace LibraryAPI.Handlers.Clients
             _ctx = ctx;
         }
 
-        public Task<DeleteClientResponseDTO> Handle(DeleteClientCommand request, CancellationToken cancellationToken)
+        public async Task<DeleteClientResponseDTO> Handle(DeleteClientCommand request, CancellationToken cancellationToken)
         {
             var client = new Client()
             {
                 Id = request.Id,
             };
 
-            _ctx.Clients.Add(client);
+            _ctx.Clients.Remove(client);
             await _ctx.SaveChangesAsync();
             var result = new DeleteClientResponseDTO()
             {
