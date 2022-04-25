@@ -1,5 +1,5 @@
 using AutoMapper;
-using Library.Models.DTO.Models.Book;
+using Library.Models.DTO.Models.Books;
 using Library.Models.DTO.Requests;
 using Library.Models.DTO.Responses;
 using LibraryAPI.Commands.Books;
@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LibraryAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class BookController : ControllerBase
     {
         private readonly ISender _sender;

@@ -1,4 +1,4 @@
-﻿using Library.Models.DTO.Models.Book;
+﻿using Library.Models.DTO.Models.Books;
 using MediatR;
 
 namespace LibraryAPI.Queries.Books

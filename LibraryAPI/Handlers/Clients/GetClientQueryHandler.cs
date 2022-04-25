@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Library.Models.DTO.Models.Client;
+using Library.Models.DTO.Models.Clients;
 using LibraryAPI.Data;
 using LibraryAPI.Data.Models;
 using LibraryAPI.Queries.Clients;

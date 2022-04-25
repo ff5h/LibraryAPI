@@ -17,6 +17,7 @@ namespace LibraryAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();

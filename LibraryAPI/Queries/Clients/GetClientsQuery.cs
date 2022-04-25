@@ -1,4 +1,4 @@
-﻿using Library.Models.DTO.Models.Client;
+﻿using Library.Models.DTO.Models.Clients;
 using MediatR;
 
 namespace LibraryAPI.Queries.Clients

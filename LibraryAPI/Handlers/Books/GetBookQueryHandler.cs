@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Library.Models.DTO.Models.Book;
+using Library.Models.DTO.Models.Books;
 using LibraryAPI.Data;
 using LibraryAPI.Data.Models;
 using LibraryAPI.Queries.Books;

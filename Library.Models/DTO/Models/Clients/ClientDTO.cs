@@ -1,4 +1,4 @@
-﻿namespace Library.Models.DTO.Models.Client
+﻿namespace Library.Models.DTO.Models.Clients
 {
     public class ClientDTO
     {
