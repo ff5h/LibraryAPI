@@ -12,6 +12,7 @@ namespace LibraryAPI.MapperProfiles
         {
             CreateMap<Book, BookDTO>();
             CreateMap<AddBookRequestDTO, AddBookCommand>();
+            CreateMap<DeleteBookRequestDTO, DeleteBookCommand>();
         }
     }
 }
