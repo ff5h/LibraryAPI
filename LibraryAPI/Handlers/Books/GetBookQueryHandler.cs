@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
 using Library.Models.DTO.Models.Books;
-using LibraryAPI.Data;
-using LibraryAPI.Data.Models;
+using Library.Repository.Models;
 using LibraryAPI.Queries.Books;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Library.Repository.Interfaces;
 
 namespace LibraryAPI.Handlers.Books
 {
     //Какой запрос обрабатываю, и что должен вернуть
     public class GetBookQueryHandler : IRequestHandler<GetBooksQuery, IEnumerable<BookDTO>>
     {
-        private readonly AppDBContext _ctx;
+        private readonly IAppDBContext _ctx;
         private readonly IMapper _mapper;
 
-        public GetBookQueryHandler(AppDBContext ctx, IMapper mapper)
+        public GetBookQueryHandler(IAppDBContext ctx, IMapper mapper)
         {
             _ctx = ctx;
             _mapper = mapper;

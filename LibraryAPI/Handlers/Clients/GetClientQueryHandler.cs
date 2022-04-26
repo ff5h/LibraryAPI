@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
 using Library.Models.DTO.Models.Clients;
-using LibraryAPI.Data;
-using LibraryAPI.Data.Models;
+using Library.Repository.Models;
 using LibraryAPI.Queries.Clients;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Library.Repository.Interfaces;
 
 namespace LibraryAPI.Handlers.Clients
 {
     //Какой запрос я обрабатываю и что я должен вернуть
     public class GetClientQueryHandler : IRequestHandler<GetClientsQuery, IEnumerable<ClientDTO>>
     {
-        private readonly AppDBContext _ctx;
+        private readonly IAppDBContext _ctx;
         private readonly IMapper _mapper;
 
-        public GetClientQueryHandler(AppDBContext ctx, IMapper mapper)
+        public GetClientQueryHandler(IAppDBContext ctx, IMapper mapper)
         {
             _ctx = ctx;
             _mapper = mapper;

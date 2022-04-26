@@ -22,7 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Library.LibrarianBot\Library.LibrarianBot.csproj" />
     <ProjectReference Include="..\Library.Models\Library.Models.csproj" />
+    <ProjectReference Include="..\Library.Repository\Library.Repository.csproj" />
   </ItemGroup>
 
 </Project>

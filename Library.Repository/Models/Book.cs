@@ -1,4 +1,4 @@
-﻿namespace LibraryAPI.Data.Models
+﻿namespace Library.Repository.Models
 {
     public class Book
     {

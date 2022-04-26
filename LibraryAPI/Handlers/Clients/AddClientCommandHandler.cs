@@ -1,16 +1,16 @@
 ﻿using Library.Models.DTO.Responses;
 using LibraryAPI.Commands.Clients;
-using LibraryAPI.Data;
-using LibraryAPI.Data.Models;
+using Library.Repository.Models;
 using MediatR;
+using Library.Repository.Interfaces;
 
 namespace LibraryAPI.Handlers.Clients
 {
     public class AddClientCommandHandler : IRequestHandler<AddClientCommand, AddClientResponseDTO>
     {
-        private readonly AppDBContext _ctx;
+        private readonly IAppDBContext _ctx;
 
-        public AddClientCommandHandler(AppDBContext ctx)
+        public AddClientCommandHandler(IAppDBContext ctx)
         {
             _ctx = ctx;
         }

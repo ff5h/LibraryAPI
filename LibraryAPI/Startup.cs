@@ -1,4 +1,5 @@
-﻿using LibraryAPI.Data;
+﻿using Library.Repository.Interfaces;
+using LibraryAPI.Data;
 using LibraryAPI.MapperProfiles;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace LibraryAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IAppDBContext>(provider => provider.GetService<AppDBContext>());
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllers();
             services.AddEndpointsApiExplorer();
@@ -24,6 +26,8 @@ namespace LibraryAPI
             services.AddMediatR(typeof(Startup));
             services.AddAutoMapper(typeof(BookMapperProfile),
                                    typeof(ClientMapperProfile));
+
+            services.AddHostedService<Library.LibrarianBot.BotService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -41,6 +45,11 @@ namespace LibraryAPI
             {
                 endpoints.MapControllers();
             });
+        }
+
+        public void ConfigureConfiguration(IConfigurationBuilder configuration)
+        {
+            configuration.AddJsonFile("bottokens.json");
         }
 
         public void InitializeDatabase(AppDBContext ctx)

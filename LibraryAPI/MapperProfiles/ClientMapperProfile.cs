@@ -3,7 +3,7 @@ using Library.Models.DTO.Models.Clients;
 using Library.Models.DTO.Requests;
 using Library.Models.DTO.Responses;
 using LibraryAPI.Commands.Clients;
-using LibraryAPI.Data.Models;
+using Library.Repository.Models;
 
 namespace LibraryAPI.MapperProfiles
 {

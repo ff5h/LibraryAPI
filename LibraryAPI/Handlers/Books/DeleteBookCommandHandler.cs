@@ -1,16 +1,15 @@
 ﻿using Library.Models.DTO.Responses;
 using LibraryAPI.Commands.Books;
-using LibraryAPI.Data;
-using LibraryAPI.Data.Models;
 using MediatR;
+using Library.Repository.Interfaces;
 
 namespace LibraryAPI.Handlers.Books
 {
     public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, DeleteBookResponseDTO>
     {
-        private readonly AppDBContext _ctx;
+        private readonly IAppDBContext _ctx;
 
-        public DeleteBookCommandHandler(AppDBContext ctx)
+        public DeleteBookCommandHandler(IAppDBContext ctx)
         {
             _ctx = ctx;
         }

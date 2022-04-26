@@ -1,17 +1,17 @@
 ﻿using Library.Models.DTO.Responses;
 using LibraryAPI.Commands.Books;
-using LibraryAPI.Data;
-using LibraryAPI.Data.Models;
+using Library.Repository.Models;
 using MediatR;
+using Library.Repository.Interfaces;
 
 namespace LibraryAPI.Handlers.Books
 {
     //The handler expects an AddBookCommand and returns an AddBookResponseDTO
     public class AddBookCommandHandler : IRequestHandler<AddBookCommand, AddBookResponseDTO>
     {
-        private readonly AppDBContext _ctx;
+        private readonly IAppDBContext _ctx;
 
-        public AddBookCommandHandler(AppDBContext ctx)
+        public AddBookCommandHandler(IAppDBContext ctx)
         {
             _ctx = ctx;
         }

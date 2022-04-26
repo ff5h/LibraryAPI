@@ -1,9 +1,10 @@
-﻿using LibraryAPI.Data.Models;
+﻿using Library.Repository.Interfaces;
+using Library.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryAPI.Data
 {
-    public class AppDBContext : DbContext
+    public class AppDBContext : DbContext, IAppDBContext
     {
         public AppDBContext(DbContextOptions<AppDBContext> options) : base(options) { }
 

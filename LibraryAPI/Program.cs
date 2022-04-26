@@ -7,6 +7,7 @@ namespace LibraryAPI
             var builder = WebApplication.CreateBuilder(args);
 
             var startup = new Startup(builder.Configuration);
+            builder.Host.ConfigureAppConfiguration(startup.ConfigureConfiguration);
             startup.ConfigureServices(builder.Services);
 
             var app = builder.Build();

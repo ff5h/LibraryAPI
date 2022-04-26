@@ -1,17 +1,16 @@
 ﻿using Library.Models.DTO.Responses;
 using LibraryAPI.Commands.Clients;
-using LibraryAPI.Data;
-using LibraryAPI.Data.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Library.Repository.Interfaces;
 
 namespace LibraryAPI.Handlers.Clients
 {
     public class DeleteClientCommandHandler : IRequestHandler<DeleteClientCommand, DeleteClientResponseDTO>
     {
-        private readonly AppDBContext _ctx;
+        private readonly IAppDBContext _ctx;
 
-        public DeleteClientCommandHandler(AppDBContext ctx)
+        public DeleteClientCommandHandler(IAppDBContext ctx)
         {
             _ctx = ctx;
         }
