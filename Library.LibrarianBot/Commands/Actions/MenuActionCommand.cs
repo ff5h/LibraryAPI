@@ -1,6 +1,6 @@
 ﻿namespace Library.LibrarianBot.Commands.Actions
 {
-    public class MenuActionCommand : BaseActionCommand
+    public class MenuActionCommand : ActionCommandBase
     {
     }
 }

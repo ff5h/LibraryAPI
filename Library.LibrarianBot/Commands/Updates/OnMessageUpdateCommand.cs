@@ -1,6 +1,6 @@
 ﻿namespace Library.LibrarianBot.Commands.Updates
 {
-    public class OnUnknownUpdateCommand : UpdatesCommandBase
+    public class OnMessageUpdateCommand : UpdatesCommandBase
     {
 
     }

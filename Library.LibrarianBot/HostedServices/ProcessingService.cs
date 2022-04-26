@@ -30,9 +30,9 @@ namespace Library.LibrarianBot.HostedServices
         {
             var handler = update.Type switch
             {
-                UpdateType.Message       => _sender.Send(new OnMessageReceivedCommand { Message = update.Message }),
-                UpdateType.EditedMessage => _sender.Send(new OnMessageEditedCommand { Message = update.Message }),
-                UpdateType.CallbackQuery => _sender.Send(new OnCallbackQueryReceivedCommand { Message = update.Message }),
+                UpdateType.Message       => _sender.Send(new OnMessageUpdateCommand { Message = update.Message }),
+                UpdateType.EditedMessage => _sender.Send(new OnEditedMessageUpdateCommand { Message = update.Message }),
+                UpdateType.CallbackQuery => _sender.Send(new OnCallbackQueryUpdateCommand { Message = update.Message }),
                                        _ => _sender.Send(new OnUnknownUpdateCommand { Message = update.Message }),
             };
 

@@ -7,8 +7,7 @@ namespace Library.LibrarianBot.Handlers.Updates
     {
         public async Task<bool> Handle(OnUnknownUpdateCommand request, CancellationToken cancellationToken)
         {
-            Console.WriteLine(1);
-            return true;
+            throw new NotImplementedException();
         }
     }
 }

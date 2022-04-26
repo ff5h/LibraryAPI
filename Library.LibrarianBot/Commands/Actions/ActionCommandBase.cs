@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Telegram.Bot.Types;
 
-namespace Library.LibrarianBot.Commands.Updates
+namespace Library.LibrarianBot.Commands.Actions
 {
-    public class OnMessageReceivedCommand : IRequest<bool>
+    public class ActionCommandBase : IRequest<bool>
     {
         public Message Message { get; init; }
     }
