@@ -1,4 +1,4 @@
-﻿using Library.LibrarianBot.Commands.Messages;
+﻿using Library.LibrarianBot.Commands.Updates;
 using Library.Repository.Interfaces;
 using MediatR;
 using Telegram.Bot;
@@ -30,12 +30,10 @@ namespace Library.LibrarianBot.HostedServices
         {
             var handler = update.Type switch
             {
-                UpdateType.Message => _sender.Send(new OnMessageReceivedCommand { Message = update.Message }),
-                //UpdateType.EditedMessage => BotOnMessageReceived(botClient, update.EditedMessage!),
-                //UpdateType.CallbackQuery => BotOnCallbackQueryReceived(botClient, update.CallbackQuery!),
-                //UpdateType.InlineQuery => BotOnInlineQueryReceived(botClient, update.InlineQuery!),
-                //UpdateType.ChosenInlineResult => BotOnChosenInlineResultReceived(botClient, update.ChosenInlineResult!),
-                //_ => UnknownUpdateHandlerAsync(botClient, update)
+                UpdateType.Message       => _sender.Send(new OnMessageReceivedCommand { Message = update.Message }),
+                UpdateType.EditedMessage => _sender.Send(new OnMessageEditedCommand { Message = update.Message }),
+                UpdateType.CallbackQuery => _sender.Send(new OnCallbackQueryReceivedCommand { Message = update.Message }),
+                                       _ => _sender.Send(new OnUnknownUpdateCommand { Message = update.Message }),
             };
 
             try

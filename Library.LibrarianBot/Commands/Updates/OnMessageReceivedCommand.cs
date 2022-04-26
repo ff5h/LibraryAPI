@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Telegram.Bot.Types;
 
-namespace Library.LibrarianBot.Commands.Messages
+namespace Library.LibrarianBot.Commands.Updates
 {
     public class OnMessageReceivedCommand : IRequest<bool>
     {
