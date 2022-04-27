@@ -19,7 +19,7 @@ namespace Library.MenuBot
             return Task.Run(() =>
             {
                 var configuration = _provider.GetService<IConfiguration>();
-                string token = configuration.GetSection("LibrarianBotConfiguration").GetValue<string>("Token");
+                string token = configuration.GetSection("MenuBotConfiguration").GetValue<string>("Token");
                 var builder = Host.CreateDefaultBuilder();
                 var botClient = new TelegramBotClient(token);
                 builder.ConfigureServices(services =>
