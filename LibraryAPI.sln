@@ -7,14 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryAPI", "LibraryAPI\Li
 	ProjectSection(ProjectDependencies) = postProject
 		{0190B318-F68D-4F65-9071-C46C9F328A5A} = {0190B318-F68D-4F65-9071-C46C9F328A5A}
 		{0DC98A5B-F4CC-456B-8FAB-9FDC7292CB72} = {0DC98A5B-F4CC-456B-8FAB-9FDC7292CB72}
-		{3FEA8C65-C8AD-4B30-99CB-E72435D26CA4} = {3FEA8C65-C8AD-4B30-99CB-E72435D26CA4}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Models", "Library.Models\Library.Models.csproj", "{0190B318-F68D-4F65-9071-C46C9F328A5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Repository", "Library.Repository\Library.Repository.csproj", "{0DC98A5B-F4CC-456B-8FAB-9FDC7292CB72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Repository", "Library.Repository\Library.Repository.csproj", "{0DC98A5B-F4CC-456B-8FAB-9FDC7292CB72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.LibrarianBot", "Library.LibrarianBot\Library.LibrarianBot.csproj", "{3FEA8C65-C8AD-4B30-99CB-E72435D26CA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.MenuBot", "Library.MenuBot\Library.MenuBot.csproj", "{44314A72-8A63-4224-B75C-A7098C7E3250}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +33,10 @@ Global
 		{0DC98A5B-F4CC-456B-8FAB-9FDC7292CB72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DC98A5B-F4CC-456B-8FAB-9FDC7292CB72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DC98A5B-F4CC-456B-8FAB-9FDC7292CB72}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3FEA8C65-C8AD-4B30-99CB-E72435D26CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3FEA8C65-C8AD-4B30-99CB-E72435D26CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3FEA8C65-C8AD-4B30-99CB-E72435D26CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3FEA8C65-C8AD-4B30-99CB-E72435D26CA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44314A72-8A63-4224-B75C-A7098C7E3250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44314A72-8A63-4224-B75C-A7098C7E3250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44314A72-8A63-4224-B75C-A7098C7E3250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44314A72-8A63-4224-B75C-A7098C7E3250}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
