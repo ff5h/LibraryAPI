@@ -8,14 +8,10 @@ namespace Library.LibrarianBot.Handlers.Updates
 {
     public class OnMessageUpdateCommandHandler : IRequestHandler<OnMessageUpdateCommand, bool>
     {
-        private readonly ITelegramBotClient _botClient;
-        private readonly IAppDBContext _ctx;
         private readonly ISender _sender;
 
-        public OnMessageUpdateCommandHandler(ITelegramBotClient botClient, IAppDBContext ctx ,ISender sender)
+        public OnMessageUpdateCommandHandler(ISender sender)
         {
-            _botClient = botClient;
-            _ctx = ctx;
             _sender = sender;
         }
 

@@ -7,12 +7,10 @@ namespace Library.LibrarianBot.Handlers.Actions
     public class MenuActionCommandHandler : IRequestHandler<MenuActionCommand, bool>
     {
         private readonly ITelegramBotClient _botClient;
-        private readonly ISender _sender;
 
-        public MenuActionCommandHandler(ITelegramBotClient botClient, ISender sender)
+        public MenuActionCommandHandler(ITelegramBotClient botClient)
         {
             _botClient = botClient;
-            _sender = sender;
         }
 
         public async Task<bool> Handle(MenuActionCommand request, CancellationToken cancellationToken)

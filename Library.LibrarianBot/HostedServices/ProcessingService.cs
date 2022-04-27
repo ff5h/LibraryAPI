@@ -10,13 +10,11 @@ namespace Library.LibrarianBot.HostedServices
 {
     public class ProcessingService : IHostedService, IUpdateHandler
     {
-        private readonly IAppDBContext _ctx;
         private readonly ITelegramBotClient _botClient;
         private readonly ISender _sender;
 
-        public ProcessingService(IAppDBContext ctx, ITelegramBotClient botClient, ISender sender)
+        public ProcessingService(ITelegramBotClient botClient, ISender sender)
         {
-            _ctx = ctx;
             _botClient = botClient;
             _sender = sender;
         }
