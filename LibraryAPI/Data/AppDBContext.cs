@@ -10,7 +10,7 @@ namespace LibraryAPI.Data
 
         protected override void OnModelCreating(ModelBuilder builder) { }
 
-        public DbSet<Book> Books { get; private set; }
-        public DbSet<Client> Clients { get; private set; }
+        public DbSet<DishCategory> DishCategories { get; private set; }
+        public DbSet<Dish> Dishes { get; private set; }
     }
 }

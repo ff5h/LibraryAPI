@@ -5,8 +5,8 @@ namespace Library.Repository.Interfaces
 {
     public interface IAppDBContext
     {
-        public DbSet<Book> Books { get; }
-        public DbSet<Client> Clients { get; }
+        public DbSet<DishCategory> DishCategories { get; }
+        public DbSet<Dish> Dishes { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

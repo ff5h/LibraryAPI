@@ -24,10 +24,9 @@ namespace LibraryAPI
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.AddMediatR(typeof(Startup));
-            services.AddAutoMapper(typeof(BookMapperProfile),
-                                   typeof(ClientMapperProfile));
+            services.AddAutoMapper(typeof(MenuMapperProfile));
 
-            services.AddHostedService<Library.LibrarianBot.BotService>();
+            services.AddHostedService<Library.MenuBot.BotService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

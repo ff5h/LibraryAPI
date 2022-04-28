@@ -18,4 +18,9 @@
     <ProjectReference Include="..\Library.Repository\Library.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\Markups\" />
+    <Folder Include="Responses\" />
+  </ItemGroup>
+
 </Project>

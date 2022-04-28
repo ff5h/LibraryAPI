@@ -1,6 +1,6 @@
 ﻿namespace Library.MenuBot.Commands.Actions
 {
-    public class MenuActionCommand : ActionCommandBase
+    public class BasketActionCommand : ActionCommandBase
     {
 
     }
