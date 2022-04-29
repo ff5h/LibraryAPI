@@ -1,9 +1,9 @@
-﻿using Library.MenuBot.Commands.Actions;
+﻿using Library.MenuBot.Commands.Actions.Messages;
 using Library.MenuBot.Queries.Markups;
 using MediatR;
 using Telegram.Bot;
 
-namespace Library.MenuBot.Handlers.Actions
+namespace Library.MenuBot.Handlers.Actions.Messages
 {
     public class StartActionCommandHandler : IRequestHandler<StartActionCommand, bool>
     {

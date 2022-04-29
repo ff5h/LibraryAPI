@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Telegram.Bot.Types;
 
-namespace Library.MenuBot.Commands.Actions
+namespace Library.MenuBot.Commands.Actions.Messages
 {
     public class ActionCommandBase : IRequest<bool>
     {

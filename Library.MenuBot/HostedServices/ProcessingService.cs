@@ -28,7 +28,7 @@ namespace Library.MenuBot.HostedServices
             var handler = update.Type switch
             {
                 UpdateType.Message       => _sender.Send(new OnMessageUpdateCommand { Message = update.Message }),
-                UpdateType.CallbackQuery => _sender.Send(new OnCallbackQueryUpdateCommand { Message = update.Message }),
+                UpdateType.CallbackQuery => _sender.Send(new OnCallbackQueryUpdateCommand { CallbackQuery = update.CallbackQuery }),
                                        _ => _sender.Send(new OnUnknownUpdateCommand { Message = update.Message }),
             };
 
@@ -46,7 +46,7 @@ namespace Library.MenuBot.HostedServices
         {
             return Task.Run(() =>
             {
-                ReceiverOptions receiverOptions = new() { AllowedUpdates = { } };
+                 var receiverOptions = new ReceiverOptions() { AllowedUpdates = { } };
                 _botClient.StartReceiving(this, receiverOptions, cancellationToken);
             });
         }

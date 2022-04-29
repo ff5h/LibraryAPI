@@ -1,8 +1,8 @@
-﻿using Library.MenuBot.Commands.Actions;
+﻿using Library.MenuBot.Commands.Actions.Messages;
 using MediatR;
 using Telegram.Bot;
 
-namespace Library.MenuBot.Handlers.Actions
+namespace Library.MenuBot.Handlers.Actions.Messages
 {
     public class InformationActionCommandHandler : IRequestHandler<InformationActionCommand, bool>
     {

@@ -19,7 +19,7 @@ namespace Library.MenuBot.Handlers.Markups
         public async Task<IReplyMarkup> Handle(GetMenuMarkupQuery request, CancellationToken cancellationToken)
         {
             var categories = await _ctx.DishCategories.ToArrayAsync();
-            var categoriesDict = new Dictionary<string, string>(categories.Select(c => new KeyValuePair<string, string>(c.Id.ToString(), c.Name)));
+            var categoriesDict = new Dictionary<string, string>(categories.Select(c => new KeyValuePair<string, string>("Menu " + c.Id.ToString(), c.Name)));
             var markup = TelegramUtilities.CreateInlineKeyboardButton(categoriesDict);
             return markup;
         }
