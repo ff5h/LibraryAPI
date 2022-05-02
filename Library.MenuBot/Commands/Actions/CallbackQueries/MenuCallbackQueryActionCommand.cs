@@ -4,6 +4,6 @@ namespace Library.MenuBot.Commands.Actions.CallbackQueries
 {
     public class MenuCallbackQueryActionCommand : IRequest<bool>
     {
-
+        public int CategoryId { get; set; }
     }
 }

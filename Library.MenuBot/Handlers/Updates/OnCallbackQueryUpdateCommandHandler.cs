@@ -1,4 +1,5 @@
-﻿using Library.MenuBot.Commands.Updates;
+﻿using Library.MenuBot.Commands.Actions.CallbackQueries;
+using Library.MenuBot.Commands.Updates;
 using MediatR;
 
 namespace Library.MenuBot.Handlers.Updates
@@ -17,12 +18,13 @@ namespace Library.MenuBot.Handlers.Updates
             string[] splittedCallbackQueryData = callbackQueryData.Split(' ');
             if (splittedCallbackQueryData[0] == "Menu")
             {
-                _sender.Send(new MenuCallBackQueryReceivedCommand)
+                _sender.Send(new MenuCallbackQueryActionCommand { CategoryId = Convert.ToInt32(splittedCallbackQueryData) });
             }
-            bool result = splittedCallbackQueryData[0] switch
+            
+            else if (splittedCallbackQueryData[0] == "Basket")
             {
-                "Menu" => _sender.Send(new MenuPicker)
-            }; //Displayer, Assembler, Demonstrator, Presentor
+                _sender.Send(new BasketCallbackQueryActionCommand { CategoryId = Convert.ToInt32(splittedCallbackQueryData) });
+            }
         }
     }
 }
