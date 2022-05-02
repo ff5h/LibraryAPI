@@ -16,9 +16,20 @@ namespace Library.MenuBot.Handlers.Markups
             _ctx = ctx;
         }
 
-        public Task<IReplyMarkup> Handle(GetCategoryMarkupQuery request, CancellationToken cancellationToken)
+        public async Task<IReplyMarkup> Handle(GetCategoryMarkupQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var buttons = new[]
+                    {
+                        new []
+                        {
+                            InlineKeyboardButton.WithCallbackData("Назад", "Previous"),
+                            InlineKeyboardButton.WithCallbackData("До меню", "Menu"),
+                            InlineKeyboardButton.WithCallbackData("Кошик", "Basket"),
+                            InlineKeyboardButton.WithCallbackData("Вперед", "Next"),
+                        },
+                    };
+            InlineKeyboardMarkup markup = new(buttons);
+            return markup; //Переделать
         }
     }
 }

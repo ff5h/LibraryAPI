@@ -1,6 +1,8 @@
 ﻿using Library.MenuBot.Commands.Actions.CallbackQueries;
+using Library.MenuBot.Queries.Markups;
 using MediatR;
 using Telegram.Bot;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Library.MenuBot.Handlers.Actions.CallbackQueries
 {
@@ -17,21 +19,11 @@ namespace Library.MenuBot.Handlers.Actions.CallbackQueries
 
         public async Task<bool> Handle(MenuCallbackQueryActionCommand request, CancellationToken cancellationToken)
         {
-            var buttons = new[]
-                    {
-                        new []
-                        {
-                            InlineKeyboardButton.WithCallbackData("Назад", "Previous"),
-                            InlineKeyboardButton.WithCallbackData("До меню", "Menu"),
-                            InlineKeyboardButton.WithCallbackData("Кошик", "Basket"),
-                            InlineKeyboardButton.WithCallbackData("Вперед", "Next"),
-                        },
-                    };
-            InlineKeyboardMarkup inlineKeyboard = new(buttons);
-            await botClient.SendPhotoAsync(chatId: update.Message.Chat.Id,
+            await _botClient.SendPhotoAsync(chatId: request.CallbackQuery.Message.Chat.Id,
                                   caption: "test",
                                   photo: "http://surl.li/bwkax",
-                                  replyMarkup: inlineKeyboard);
+                                  replyMarkup: await _sender.Send(new GetCategoryMarkupQuery()));
+            return true;
         }
     }
 }

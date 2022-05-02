@@ -12,19 +12,23 @@ namespace Library.MenuBot.Handlers.Updates
         {
             _sender = sender;
         }
-        public Task<bool> Handle(OnCallbackQueryUpdateCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(OnCallbackQueryUpdateCommand request, CancellationToken cancellationToken)
         {
             string callbackQueryData = request.CallbackQuery.Data;
             string[] splittedCallbackQueryData = callbackQueryData.Split(' ');
-            if (splittedCallbackQueryData[0] == "Menu")
+            bool result = splittedCallbackQueryData[0] switch
             {
-                _sender.Send(new MenuCallbackQueryActionCommand { CategoryId = Convert.ToInt32(splittedCallbackQueryData) });
-            }
-            
-            else if (splittedCallbackQueryData[0] == "Basket")
-            {
-                _sender.Send(new BasketCallbackQueryActionCommand { CategoryId = Convert.ToInt32(splittedCallbackQueryData) });
-            }
+                "Menu" => await _sender.Send(new MenuCallbackQueryActionCommand()
+                {
+                    CallbackQuery = request.CallbackQuery,
+                }),
+
+                "Basket" => await _sender.Send(new BasketCallbackQueryActionCommand()
+                {
+                    CallbackQuery = request.CallbackQuery,
+                }),
+            };
+            return true;
         }
     }
 }

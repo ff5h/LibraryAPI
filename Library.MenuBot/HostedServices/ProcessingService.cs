@@ -29,7 +29,7 @@ namespace Library.MenuBot.HostedServices
             {
                 UpdateType.Message       => _sender.Send(new OnMessageUpdateCommand { Message = update.Message }),
                 UpdateType.CallbackQuery => _sender.Send(new OnCallbackQueryUpdateCommand { CallbackQuery = update.CallbackQuery }),
-                                       _ => _sender.Send(new OnUnknownUpdateCommand { Message = update.Message }),
+                                       _ => _sender.Send(new OnUnknownUpdateCommand { Update = update }),
             };
 
             try

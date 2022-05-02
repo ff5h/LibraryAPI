@@ -4,9 +4,9 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Library.MenuBot.Handlers.Markups
 {
-    public class GetMainKeyboardMarkupQueryHandler : IRequestHandler<GetMainKeyboardMarkupQuery, ReplyKeyboardMarkup>
+    public class GetMainKeyboardMarkupQueryHandler : IRequestHandler<GetMainKeyboardMarkupQuery, IReplyMarkup>
     {
-        public async Task<ReplyKeyboardMarkup> Handle(GetMainKeyboardMarkupQuery request, CancellationToken cancellationToken)
+        public async Task<IReplyMarkup> Handle(GetMainKeyboardMarkupQuery request, CancellationToken cancellationToken)
         {
             var buttons = new[]
             {

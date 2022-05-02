@@ -5,6 +5,6 @@ namespace Library.MenuBot.Commands.Updates
 {
     public class OnUnknownUpdateCommand : IRequest<bool>
     {
-        public Message Message { get; init; }
+        public Update Update { get; init; }
     }
 }

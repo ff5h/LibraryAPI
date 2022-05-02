@@ -1,9 +1,10 @@
 ﻿using MediatR;
+using Telegram.Bot.Types;
 
 namespace Library.MenuBot.Commands.Actions.CallbackQueries
 {
     public class BasketCallbackQueryActionCommand : IRequest<bool>
     {
-        public int CategoryId { get; set; }
+        public CallbackQuery CallbackQuery { get; set; }
     }
 }

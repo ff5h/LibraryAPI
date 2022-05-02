@@ -3,7 +3,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Library.MenuBot.Queries.Markups
 {
-    public class GetMainKeyboardMarkupQuery : IRequest<ReplyKeyboardMarkup>
+    public class GetMainKeyboardMarkupQuery : IRequest<IReplyMarkup>
     {
         
     }
