@@ -9,5 +9,7 @@ namespace Library.Models.DTO.Models.Dishes
         public DishCategory Category { get; set; }
         public double Price { get; set; }
         public int Weight { get; set; }
+        public Guid PhotoId { get; set; }
+
     }
 }

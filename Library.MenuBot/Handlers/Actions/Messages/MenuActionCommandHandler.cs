@@ -20,7 +20,7 @@ namespace Library.MenuBot.Handlers.Actions.Messages
         {
             await _botClient.SendTextMessageAsync(chatId: request.Message.Chat.Id,
                                                          text: "Оберіть категорію:",
-                                                         replyMarkup: await _sender.Send(new GetMenuMarkupQuery()));
+                                                         replyMarkup: await _sender.Send(new GetCategoriesMarkupQuery()));
             return true;
         }
     }

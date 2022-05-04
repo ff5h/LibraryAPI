@@ -10,5 +10,7 @@ namespace LibraryAPI.Commands.Menu
         public int CategoryId { get; set; }
         public double Price { get; set; }
         public int Weight { get; set; }
+        public Guid PhotoId { get; set; }
+
     }
 }

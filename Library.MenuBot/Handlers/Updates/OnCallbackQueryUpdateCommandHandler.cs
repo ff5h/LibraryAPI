@@ -1,4 +1,5 @@
 ﻿using Library.MenuBot.Commands.Actions.CallbackQueries;
+using Library.MenuBot.Commands.Actions.Messages;
 using Library.MenuBot.Commands.Updates;
 using MediatR;
 
@@ -26,6 +27,16 @@ namespace Library.MenuBot.Handlers.Updates
                 "Basket" => await _sender.Send(new BasketCallbackQueryActionCommand()
                 {
                     CallbackQuery = request.CallbackQuery,
+                }),
+
+                "Buy" => await _sender.Send(new BuyCallBackQueryActionCommand()
+                {
+                    CallbackQuery = request.CallbackQuery,
+                }),
+
+                "Categories" => await _sender.Send(new MenuActionCommand()
+                {
+                    Message = request.CallbackQuery.Message,
                 }),
             };
             return true;

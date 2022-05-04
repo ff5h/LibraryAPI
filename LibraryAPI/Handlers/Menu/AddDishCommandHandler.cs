@@ -28,7 +28,8 @@ namespace LibraryAPI.Handlers.Menu
                 Name = request.Name,
                 Price = request.Price,
                 Weight = request.Weight,
-                Category = category
+                Category = category,
+                PhotoId = request.PhotoId
             };
             _ctx.Dishes.Add(dish);
             await _ctx.SaveChangesAsync();

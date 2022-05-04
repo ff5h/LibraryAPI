@@ -1,6 +1,9 @@
 ﻿using Library.Repository.Interfaces;
+using Library.Shared.Interfaces.Services;
 using LibraryAPI.Data;
 using LibraryAPI.MapperProfiles;
+using LibraryAPI.Services;
+using LiteDB;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +22,8 @@ namespace LibraryAPI
         {
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAppDBContext>(provider => provider.GetService<AppDBContext>());
+            services.AddSingleton<ILiteDatabase>(_ => new LiteDatabase(_configuration.GetConnectionString("NoSQLConnection")));
+            services.AddSingleton<IDataStorageService<Guid>, DataStorageService<Guid>>();
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllers();
             services.AddEndpointsApiExplorer();

@@ -6,5 +6,7 @@
         public int CategoryId { get; init; }
         public double Price { get; init; }
         public int Weight { get; init; }
+        public Guid PhotoId { get; set; }
+
     }
 }
