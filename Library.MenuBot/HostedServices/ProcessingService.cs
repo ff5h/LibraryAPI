@@ -20,6 +20,7 @@ namespace Library.MenuBot.HostedServices
 
         public Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
         {
+            Console.WriteLine(exception.Message);
             return Task.CompletedTask;
         }
 

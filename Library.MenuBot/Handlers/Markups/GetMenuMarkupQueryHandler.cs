@@ -22,7 +22,7 @@ namespace Library.MenuBot.Handlers.Markups
                 {
                     InlineKeyboardButton.WithCallbackData("Назад", $"Menu {request.CategoryId} {previousId}"),
                     InlineKeyboardButton.WithCallbackData("До меню", "Categories"),
-                    InlineKeyboardButton.WithCallbackData("Купити", $"Buy {request.DishId}"),
+                    InlineKeyboardButton.WithCallbackData("Купити", $"Buy {request.DishId} 1"),
                     InlineKeyboardButton.WithCallbackData("Вперед", $"Menu {request.CategoryId} {nextId}"),
                 },
             };

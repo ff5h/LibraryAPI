@@ -33,6 +33,7 @@ namespace Library.MenuBot.Handlers.Actions.CallbackQueries
             var dish = await dishes.FirstOrDefaultAsync();
             if (dish == null)
                 return false;
+            int count = int.Parse(splittedCallbackQueryData[2]);
             string caption = $"Ви впевнені, що хочете купити?\n{dish.Name} {dish.Weight}г.\n💸{dish.Price}₴";
             var fileInfo = _storage.GetFileInfo(dish.PhotoId);
             await _botClient.SendPhotoAsync(chatId: request.CallbackQuery.Message.Chat.Id,
@@ -41,6 +42,7 @@ namespace Library.MenuBot.Handlers.Actions.CallbackQueries
                                   replyMarkup: await _sender.Send(new GetBuyMarkupQuery()
                                   {
                                       DishId = dishId,
+                                      Count = count,
                                   }));
             return true;
         }
