@@ -15,6 +15,14 @@ namespace LibraryAPI.Controllers
             _sender = sender;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DownloadFile(Guid id)
+        {
+            var request = new GetFileQuery<Guid> { Id = id };
+            var result = await _sender.Send(request);
+            return new FileStreamResult(result.FileStream, result.ContentType);
+        }
+
         [HttpPost]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
@@ -27,16 +35,6 @@ namespace LibraryAPI.Controllers
             var result = await _sender.Send(request);
 
             return Ok(result);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> DownloadFile(Guid id)
-        {
-            var request = new GetFileQuery<Guid> { Id = id };
-
-            var result = await _sender.Send(request);
-
-            return new FileStreamResult(result.Item1, result.Item2);
         }
     }
 }

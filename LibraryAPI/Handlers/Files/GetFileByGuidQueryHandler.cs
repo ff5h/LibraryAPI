@@ -4,7 +4,7 @@ using MediatR;
 
 namespace LibraryAPI.Handlers.Files
 {
-    public class GetFileByGuidQueryHandler : IRequestHandler<GetFileQuery<Guid>, Tuple<Stream, string>>
+    public class GetFileByGuidQueryHandler : IRequestHandler<GetFileQuery<Guid>, (Stream FileStream, string ContentType)>
     {
         private readonly IDataStorageService<Guid> _storage;
 
@@ -13,12 +13,13 @@ namespace LibraryAPI.Handlers.Files
             _storage = storage;
         }
 
-        public Task<Tuple<Stream, string>> Handle(GetFileQuery<Guid> request, CancellationToken cancellationToken)
+        public Task<(Stream FileStream, string ContentType)> Handle(GetFileQuery<Guid> request, CancellationToken cancellationToken)
         {
             return Task.Run(() =>
             {
                 var fileInfo = _storage.GetFileInfo(request.Id);
-                return new Tuple<Stream, string>(fileInfo.OpenRead(), fileInfo.MimeType);
+                return (FileSream: fileInfo.OpenRead(),
+                        ContentType: fileInfo.MimeType);
             });
         }
     }

@@ -2,7 +2,7 @@
 
 namespace LibraryAPI.Queries.Files
 {
-    public class GetFileQuery<T> : IRequest<Tuple<Stream, string>>
+    public class GetFileQuery<T> : IRequest<(Stream FileStream, string ContentType)>
     {
         public T Id { get; init; }
     }

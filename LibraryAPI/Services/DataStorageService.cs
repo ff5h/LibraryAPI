@@ -1,40 +1,48 @@
-﻿using Library.Shared.Interfaces;
+﻿using Library.Repository.Interfaces;
+using Library.Repository.Models;
+using Library.Shared.Interfaces;
 using Library.Shared.Interfaces.Services;
 using LibraryAPI.Adapters;
 using LiteDB;
 
 namespace LibraryAPI.Services
 {
-    public class DataStorageService<T> : IDataStorageService<T>
+    public class DataStorageService : IDataStorageService<Guid>
     {
-        private readonly ILiteStorage<T> _storage;
+        private readonly ILiteStorage<Guid> _storage;
         private readonly ILiteDatabase _db;
+        private readonly IAppDBContext _ctx;
 
-        public DataStorageService(ILiteDatabase liteDb)
+        public DataStorageService(ILiteDatabase liteDb, IAppDBContext ctx)
         {
-            _storage = liteDb.GetStorage<T>("Files");
+            _storage = liteDb.GetStorage<Guid>("Files");
             _db = liteDb;
+            _ctx = ctx;
         }
         
-        public IFileInfo<T> GetFileInfo(T id)
+        public IFileInfo<Guid> GetFileInfo(Guid id)
         {
             var result = _storage.FindById(id);
-            return new LiteFileInfoAdapter<T>(result);
+            return new LiteFileInfoAdapter<Guid>(result);
         }
 
-        public async Task<IFileInfo<T>> UploadFile(Stream stream, string fileName)
+        public async Task<IFileInfo<Guid>> UploadFile(Stream stream, string fileName)
         {
-            T id;
-            if (typeof(T).IsAssignableFrom(typeof(Guid)))
+            Guid id = Guid.NewGuid();
+            var fileStream = _storage.OpenWrite(id, fileName);
+            await stream.CopyToAsync(fileStream);
+            fileStream.Close();
+            _db.Checkpoint();
+            var fileInfo = fileStream.FileInfo;
+            var attachment = new Attachment()
             {
-                id = (T)(object)Guid.NewGuid();
-                var fileStream = _storage.OpenWrite(id, fileName);
-                await stream.CopyToAsync(fileStream);
-                fileStream.Close();
-                _db.Checkpoint();
-                return new LiteFileInfoAdapter<T>(fileStream.FileInfo);
-            }
-            throw new NotSupportedException("Support only GUID file storage");
+                Id = fileInfo.Id,
+                Name = fileInfo.Filename,
+                ContentType = fileInfo.MimeType
+            };
+            _ctx.Attachments.Add(attachment);
+            await _ctx.SaveChangesAsync();
+            return new LiteFileInfoAdapter<Guid>(fileInfo);
         }
     }
 }

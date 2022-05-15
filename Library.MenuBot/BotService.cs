@@ -28,7 +28,7 @@ namespace Library.MenuBot
                     services.AddMediatR(typeof(BotService));
                     services.AddSingleton<ITelegramBotClient>(botClient);
                     services.AddScoped(_ => _provider.CreateScope().ServiceProvider.GetService<IAppDBContext>());
-                    services.AddSingleton(_ => _provider.CreateScope().ServiceProvider.GetService<IDataStorageService<Guid>>());
+                    services.AddScoped(_ => _provider.CreateScope().ServiceProvider.GetService<IDataStorageService<Guid>>());
                     services.AddHostedService<ProcessingService>();
                 });
                 var app = builder.Build();

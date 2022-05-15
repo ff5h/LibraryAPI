@@ -4,7 +4,7 @@ using Telegram.Bot;
 
 namespace Library.MenuBot.Handlers.Actions.Messages
 {
-    public class CreateCardActionCommandHandler : IRequestHandler<CreateCardActionCommand, bool>
+    public class CreateCardActionCommandHandler : IRequestHandler<CreateCardActionCommand, bool> //add implementation
     {
         private readonly ITelegramBotClient _botClient;
 
@@ -15,8 +15,11 @@ namespace Library.MenuBot.Handlers.Actions.Messages
 
         public async Task<bool> Handle(CreateCardActionCommand request, CancellationToken cancellationToken)
         {
+            await _botClient.DeleteMessageAsync(chatId: request.Message.Chat.Id,
+                                                messageId: request.Message.MessageId);
+
             await _botClient.SendTextMessageAsync(chatId: request.Message.Chat.Id,
-                                                         text: "Створити:");
+                                                  text: "Створити:");
             return true;
         }
     }

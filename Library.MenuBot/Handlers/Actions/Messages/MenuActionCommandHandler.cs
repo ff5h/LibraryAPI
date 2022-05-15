@@ -18,9 +18,12 @@ namespace Library.MenuBot.Handlers.Actions.Messages
 
         public async Task<bool> Handle(MenuActionCommand request, CancellationToken cancellationToken)
         {
+            await _botClient.DeleteMessageAsync(chatId: request.Message.Chat.Id,
+                                                messageId: request.Message.MessageId);
+
             await _botClient.SendTextMessageAsync(chatId: request.Message.Chat.Id,
-                                                         text: "Оберіть категорію:",
-                                                         replyMarkup: await _sender.Send(new GetCategoriesMarkupQuery()));
+                                                  text: "Оберіть категорію:",
+                                                  replyMarkup: await _sender.Send(new GetCategoriesMarkupQuery()));
             return true;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Library.MenuBot.Commands.Actions.Messages;
 using Library.MenuBot.Queries.Markups;
+using Library.Repository.Interfaces;
 using MediatR;
 using Telegram.Bot;
 
@@ -18,9 +19,12 @@ namespace Library.MenuBot.Handlers.Actions.Messages
 
         public async Task<bool> Handle(StartActionCommand request, CancellationToken cancellationToken)
         {
+            await _botClient.DeleteMessageAsync(chatId: request.Message.Chat.Id,
+                                                messageId: request.Message.MessageId);
+
             await _botClient.SendTextMessageAsync(chatId: request.Message.Chat.Id,
-                                                         text: "Привіт! Я з радістю допоможу тобі обрати та замовити твої улюблені страви!",
-                                                         replyMarkup: await _sender.Send(new GetMainKeyboardMarkupQuery()));
+                                                  text: "Привіт! Я з радістю допоможу тобі обрати та замовити твої улюблені страви!",
+                                                  replyMarkup: await _sender.Send(new GetMainKeyboardMarkupQuery()));
             return true;
         }
     }

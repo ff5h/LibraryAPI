@@ -7,7 +7,8 @@ namespace Library.MenuBot.Handlers.Updates
     {
         public async Task<bool> Handle(OnUnknownUpdateCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Get unknown update");
+            return true;
         }
     }
 }

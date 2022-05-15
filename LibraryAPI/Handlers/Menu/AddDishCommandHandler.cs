@@ -19,10 +19,12 @@ namespace LibraryAPI.Handlers.Menu
         public async Task<AddDishResponseDTO> Handle(AddDishCommand request, CancellationToken cancellationToken)
         {
             var category = await _ctx.DishCategories.FirstOrDefaultAsync(c => c.Id == request.CategoryId);
-            if (category == null) return new AddDishResponseDTO()
+            bool hasPhoto = await _ctx.Attachments.AnyAsync(a => a.Id == request.PhotoId);
+            if (category == null || !hasPhoto) return new AddDishResponseDTO()
             {
                 Id = -1
             };
+
             var dish = new Dish()
             {
                 Name = request.Name,

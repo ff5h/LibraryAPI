@@ -7,7 +7,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Library.MenuBot.Handlers.Markups
 {
-    public class GetCategoriesMarkupQueryHandler : IRequestHandler<GetCategoriesMarkupQuery, IReplyMarkup>
+    public class GetCategoriesMarkupQueryHandler : IRequestHandler<GetCategoriesMarkupQuery, InlineKeyboardMarkup>
     {
         private readonly IAppDBContext _ctx;
 
@@ -16,7 +16,7 @@ namespace Library.MenuBot.Handlers.Markups
             _ctx = ctx;
         }
 
-        public async Task<IReplyMarkup> Handle(GetCategoriesMarkupQuery request, CancellationToken cancellationToken)
+        public async Task<InlineKeyboardMarkup> Handle(GetCategoriesMarkupQuery request, CancellationToken cancellationToken)
         {
             var categories = await _ctx.DishCategories.ToArrayAsync();
             var categoriesDict = new Dictionary<string, string>(categories.Select(c => new KeyValuePair<string, string>($"Menu {c.Id} 0", c.Name)));

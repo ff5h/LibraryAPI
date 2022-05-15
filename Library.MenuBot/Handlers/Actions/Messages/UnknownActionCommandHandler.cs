@@ -15,8 +15,11 @@ namespace Library.MenuBot.Handlers.Actions.Messages
 
         public async Task<bool> Handle(UnknownActionCommand request, CancellationToken cancellationToken)
         {
+            await _botClient.DeleteMessageAsync(chatId: request.Message.Chat.Id,
+                                                messageId: request.Message.MessageId);
+
             await _botClient.SendTextMessageAsync(chatId: request.Message.Chat.Id,
-                                                         text: "Напишіть \"/start\" щоб почати");
+                                                  text: "Напишіть \"/start\" щоб почати");
             return true;
         }
     }
