@@ -3,6 +3,6 @@
     public interface IUserService
     {
         Task<bool> AddOrUpdateUser(long userId, int messageId);
-        int GetUserMessageId(long userId);
+        Task<int> GetUserMessageId(long userId);
     }
 }

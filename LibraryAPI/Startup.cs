@@ -21,9 +21,15 @@ namespace LibraryAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IAppDBContext>(provider => provider.GetService<AppDBContext>());
+            services.AddScoped<IAppDBContext>(provider =>
+            {
+                var dbContext = provider.GetService<AppDBContext>();
+                return dbContext;
+            }); 
             services.AddScoped<ILiteDatabase>(_ => new LiteDatabase(_configuration.GetConnectionString("NoSQLConnection")));
             services.AddScoped<IDataStorageService<Guid>, DataStorageService>();
+            services.AddScoped<IUserService, UserService>();
+
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllers();
             services.AddEndpointsApiExplorer();

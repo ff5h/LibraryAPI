@@ -1,6 +1,7 @@
 ﻿using Library.Repository.Interfaces;
 using Library.Repository.Models;
 using Library.Shared.Interfaces.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryAPI.Services
 {
@@ -17,12 +18,25 @@ namespace LibraryAPI.Services
         {
             try
             {
-                var user = new User()
+                var newUser = new User()
                 {
                     Id = userId,
                     MessageId = messageId
                 };
-                _ctx.Users.Add(user);
+
+                var currentUser = await _ctx.Users
+                    .FirstOrDefaultAsync(u => u.Id == userId);
+
+                if (currentUser == null)
+                {
+                    _ctx.Users.Add(newUser);
+                }
+                else
+                {
+                    currentUser.MessageId = messageId;
+                    _ctx.Users.Update(currentUser);
+                }
+                
                 await _ctx.SaveChangesAsync();
                 return true;
             }
@@ -32,9 +46,10 @@ namespace LibraryAPI.Services
             } 
         }
 
-        public int GetUserMessageId(long userId)
+        public async Task<int> GetUserMessageId(long userId)
         {
-            throw new NotImplementedException();
+            var result = (await _ctx.Users.FirstAsync(c => c.Id == userId)).MessageId;
+            return result;
         }
     }
 }

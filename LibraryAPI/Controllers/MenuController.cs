@@ -2,6 +2,7 @@
 using Library.Models.DTO.Models.Dishes;
 using Library.Models.DTO.Requests;
 using Library.Models.DTO.Responses;
+using Library.Shared.Interfaces.Services;
 using LibraryAPI.Commands.Menu;
 using LibraryAPI.Queries.Menu;
 using MediatR;

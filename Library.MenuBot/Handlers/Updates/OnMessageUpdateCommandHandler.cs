@@ -37,11 +37,6 @@ namespace Library.MenuBot.Handlers.Updates
                     Message = request.Message
                 }),
 
-                "Створити карту постійного клієнта" => await _sender.Send(new CreateCardActionCommand()
-                {
-                    Message = request.Message
-                }),
-
                 _ => await _sender.Send(new UnknownActionCommand()
                 {
                     Message = request.Message

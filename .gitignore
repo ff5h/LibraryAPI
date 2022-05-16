@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /LibraryAPI/bottokens.json
 /LibraryAPI/bottoken.json
+/LibraryAPI/Handlers/Files/GetGuidByFileNameQueryHandler.cs
+/LibraryAPI/Queries/Files/GetGuidByFileNameQuery.cs

@@ -10,14 +10,13 @@ namespace Library.MenuBot.Handlers.Markups
         {
             var buttons = new[]
             {
-                new KeyboardButton[] { "Меню", "Кошик", "Інформація" },
-                new KeyboardButton[] { "Створити карту постійного клієнта" },
+                new KeyboardButton[] { "Меню", "Кошик" },
+                new KeyboardButton[] { "Інформація" },
             };
 
             var keyboard = new ReplyKeyboardMarkup(buttons)
             {
-                ResizeKeyboard = true,
-                OneTimeKeyboard = false
+                ResizeKeyboard = true
             };
             return keyboard;
         }
