@@ -1,10 +1,10 @@
-﻿using MediatR;
-using Telegram.Bot.Types;
+﻿using Library.Shared.Interfaces;
+using MediatR;
 
 namespace Library.MenuBot.Commands.Actions.CallbackQueries
 {
     public class MenuCallbackQueryActionCommand : IRequest<bool>
     {
-        public CallbackQuery CallbackQuery { get; init; }
+        public ICallbackQuery CallbackQuery { get; init; }
     }
 }

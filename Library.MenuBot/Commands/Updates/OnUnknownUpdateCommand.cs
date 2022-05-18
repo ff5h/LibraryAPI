@@ -1,10 +1,10 @@
-﻿using MediatR;
-using Telegram.Bot.Types;
+﻿using Library.Shared.Interfaces;
+using MediatR;
 
 namespace Library.MenuBot.Commands.Updates
 {
     public class OnUnknownUpdateCommand : IRequest<bool>
     {
-        public Update Update { get; init; }
+        public IUpdate Update { get; init; }
     }
 }

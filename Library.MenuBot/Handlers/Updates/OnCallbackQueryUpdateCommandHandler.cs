@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Library.MenuBot.Handlers.Updates
 {
-    public class OnCallbackQueryUpdateCommandHandler : IRequestHandler<OnCallbackQueryUpdateCommand, bool>
+    public class OnCallbackQueryUpdateCommandHandler : IRequestHandler<OnCallbackQueryUpdateCommand, bool> //dev
     {
         private readonly ISender _sender;
 
@@ -39,7 +39,7 @@ namespace Library.MenuBot.Handlers.Updates
                     Message = request.CallbackQuery.Message,
                 }),
             };
-            return true;
+            return result;
         }
     }
 }

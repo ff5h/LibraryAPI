@@ -1,36 +1,28 @@
 ﻿using Library.MenuBot.Commands.Updates;
+using Library.Shared.Enums;
+using Library.Shared.Interfaces;
+using Library.Shared.Interfaces.Services;
 using MediatR;
-using Telegram.Bot;
-using Telegram.Bot.Extensions.Polling;
-using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
 
 namespace Library.MenuBot.HostedServices
 {
     public class ProcessingService : IHostedService, IUpdateHandler
     {
-        private readonly ITelegramBotClient _botClient;
+        private readonly ITelegramService _telegramService;
         private readonly ISender _sender;
 
-        public ProcessingService(ITelegramBotClient botClient, ISender sender)
+        public ProcessingService(ITelegramService telegramService, ISender sender)
         {
-            _botClient = botClient;
+            _telegramService = telegramService;
             _sender = sender;
         }
-
-        public Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
-        {
-            Console.WriteLine(exception.Message);
-            return Task.CompletedTask;
-        }
-
-        public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+        public async Task HandleUpdateAsync(IUpdate update, CancellationToken cancellationToken)
         {
             var handler = update.Type switch
             {
-                UpdateType.Message       => _sender.Send(new OnMessageUpdateCommand { Message = update.Message }),
+                UpdateType.Message => _sender.Send(new OnMessageUpdateCommand { Message = update.Message }),
                 UpdateType.CallbackQuery => _sender.Send(new OnCallbackQueryUpdateCommand { CallbackQuery = update.CallbackQuery }),
-                                       _ => _sender.Send(new OnUnknownUpdateCommand { Update = update }),
+                _ => _sender.Send(new OnUnknownUpdateCommand { Update = update }),
             };
 
             try
@@ -39,16 +31,21 @@ namespace Library.MenuBot.HostedServices
             }
             catch (Exception exception)
             {
-                await HandleErrorAsync(botClient, exception, cancellationToken);
+                await HandleErrorAsync(exception, cancellationToken);
             }
+        }
+
+        public Task HandleErrorAsync(Exception exception, CancellationToken cancellationToken)
+        {
+            Console.WriteLine(exception.Message);
+            return Task.CompletedTask;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
             return Task.Run(() =>
             {
-                 var receiverOptions = new ReceiverOptions() { AllowedUpdates = { } };
-                _botClient.StartReceiving(this, receiverOptions, cancellationToken);
+                _telegramService.StartReceiving(this, cancellationToken);
             });
         }
 

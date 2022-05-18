@@ -4,5 +4,6 @@
     {
         Task<bool> AddOrUpdateUser(long userId, int messageId);
         Task<int> GetUserMessageId(long userId);
+        Task<bool> UserExist(long userId);
     }
 }

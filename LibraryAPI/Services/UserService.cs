@@ -48,7 +48,13 @@ namespace LibraryAPI.Services
 
         public async Task<int> GetUserMessageId(long userId)
         {
-            var result = (await _ctx.Users.FirstAsync(c => c.Id == userId)).MessageId;
+            var result = (await _ctx.Users.FirstAsync(u => u.Id == userId)).MessageId;
+            return result;
+        }
+
+        public async Task<bool> UserExist(long userId)
+        {
+            var result = await _ctx.Users.AnyAsync(u => u.Id == userId);
             return result;
         }
     }

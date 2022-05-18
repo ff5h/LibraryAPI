@@ -1,4 +1,6 @@
+using Library.MenuBot.Configurations;
 using Library.MenuBot.HostedServices;
+using Library.MenuBot.Services;
 using Library.Repository.Interfaces;
 using Library.Shared.Interfaces.Services;
 using MediatR;
@@ -15,21 +17,26 @@ namespace Library.MenuBot
             _provider = provider;
         }
 
+        private IServiceProvider GetAPIProvider()
+        {
+            return _provider.CreateScope().ServiceProvider;
+        }
+
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             return Task.Run(() =>
             {
-                var configuration = _provider.GetService<IConfiguration>();
-                string token = configuration.GetSection("MenuBotConfiguration").GetValue<string>("Token");
-                var builder = Host.CreateDefaultBuilder();
-                var botClient = new TelegramBotClient(token); 
+                var builder = Host.CreateDefaultBuilder(); 
                 builder.ConfigureServices(services =>
                 {
+                    services.AddSingleton(_ => new TokenConfiguration(GetAPIProvider().GetService<IConfiguration>()
+                                                                                      .GetSection("MenuBotConfiguration")
+                                                                                      .GetValue<string>("Token")));
                     services.AddMediatR(typeof(BotService));
-                    services.AddSingleton<ITelegramBotClient>(botClient);
-                    services.AddScoped(_ => _provider.CreateScope().ServiceProvider.GetService<IAppDBContext>());
-                    services.AddScoped(_ => _provider.CreateScope().ServiceProvider.GetService<IDataStorageService<Guid>>());
-                    services.AddScoped(_ => _provider.CreateScope().ServiceProvider.GetService<IUserService>());
+                    services.AddScoped(_ => GetAPIProvider().GetService<IAppDBContext>());
+                    services.AddScoped(_ => GetAPIProvider().GetService<IDataStorageService<Guid>>());
+                    services.AddSingleton(_ => GetAPIProvider().GetService<IUserService>());
+                    services.AddSingleton<ITelegramService, TelegramService>();
                     services.AddHostedService<ProcessingService>();
                 });
                 var app = builder.Build();

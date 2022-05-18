@@ -1,4 +1,5 @@
-﻿using LibraryAPI.Commands.Files;
+﻿using Library.Models.DTO.Models.Files;
+using LibraryAPI.Commands.Files;
 using LibraryAPI.Queries.Files;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LibraryAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class FileController : ControllerBase
     {
         private readonly ISender _sender;
@@ -15,7 +16,7 @@ namespace LibraryAPI.Controllers
             _sender = sender;
         }
 
-        [HttpGet]
+        [HttpGet("DownloadFile")]
         public async Task<IActionResult> DownloadFile(Guid id)
         {
             var request = new GetFileQuery<Guid> { Id = id };
@@ -23,7 +24,15 @@ namespace LibraryAPI.Controllers
             return new FileStreamResult(result.FileStream, result.ContentType);
         }
 
-        [HttpPost]
+        [HttpGet("GetFileGuid")]
+        public async Task<FileDTO> GetFileGuid(string name)
+        {
+            var request = new GetGuidByFileNameQuery { Name = name };
+            var result = await _sender.Send(request);
+            return result;
+        }
+
+        [HttpPost("UploadFile")]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
             var request = new UploadFileCommand<Guid>

@@ -1,10 +1,10 @@
-﻿using MediatR;
-using Telegram.Bot.Types;
+﻿using Library.Shared.Interfaces;
+using MediatR;
 
 namespace Library.MenuBot.Commands.Updates
 {
     public class OnMessageUpdateCommand : IRequest<bool>
     {
-        public Message Message { get; init; }
+        public IMessage Message { get; init; }
     }
 }

@@ -38,7 +38,7 @@ namespace Library.MenuBot.Handlers.Actions.CallbackQueries
                 return false;
             string caption = $"{dish.Name} {dish.Weight}г.\n💸{dish.Price}₴";
             var fileInfo = _storage.GetFileInfo(dish.PhotoId);
-            await _botClient.SendPhotoAsync(chatId: request.CallbackQuery.Message.Chat.Id,
+            await _botClient.SendPhotoAsync(chatId: request.CallbackQuery.Message.UserId,
                                   caption: caption,
                                   photo: new InputOnlineFile(fileInfo.OpenRead(), fileInfo.Name),
                                   replyMarkup: await _sender.Send(new GetMenuMarkupQuery()
