@@ -22,7 +22,7 @@ namespace Library.MenuBot.Handlers.Actions.Messages
             int messageId = request.Message.Id;
             string text = "Номер для замовлення:\nм. Хмельницький, Свободи 13. Контакт: +380999999999";
             var replyMarkup = await _sender.Send(new GetInformationMarkupQuery());
-            await _telegramService.RefreshMessageAsync(userId, messageId, text, replyMarkup);
+            await _telegramService.RefreshTextMessageAsync(userId, messageId, text, replyMarkup);
             return true;
         }
     }

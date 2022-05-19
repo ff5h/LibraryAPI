@@ -33,7 +33,7 @@ namespace Library.MenuBot.Handlers.Actions.Messages
 
             string text = "Привіт! Я з радістю допоможу тобі обрати та замовити твої улюблені страви!";
             var replyMarkup = await _sender.Send(new GetMainKeyboardMarkupQuery());
-            await _telegramService.PushMessageAsync(userId, text, replyMarkup);
+            await _telegramService.PushMessageAsync(userId, text, replyMarkup: replyMarkup);
             return true;
         }
     }

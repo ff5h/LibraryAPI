@@ -1,9 +1,9 @@
-﻿using MediatR;
-using Telegram.Bot.Types.ReplyMarkups;
+﻿using Library.Shared.Implementations;
+using MediatR;
 
 namespace Library.MenuBot.Queries.Markups
 {
-    public class GetMenuMarkupQuery : IRequest<IReplyMarkup>
+    public class GetMenuMarkupQuery : IRequest<InlineReplyMarkup>
     {
         public int CategoryId { get; init; }
         public int CurrentPossition { get; init; }

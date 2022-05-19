@@ -5,35 +5,42 @@ using MediatR;
 
 namespace Library.MenuBot.Handlers.Markups
 {
-    public class GetBuyMarkupQueryHandler : IRequestHandler<GetBuyMarkupQuery, IMarkup>
+    public class GetBuyMarkupQueryHandler : IRequestHandler<GetBuyMarkupQuery, InlineReplyMarkup>
     {
-        public async Task<IMarkup> Handle(GetBuyMarkupQuery request, CancellationToken cancellationToken)
+        public async Task<InlineReplyMarkup> Handle(GetBuyMarkupQuery request, CancellationToken cancellationToken)
         {
-            //var buttons = new[]
-            //{
-            //    new []
-            //    {
-            //        InlineKeyboardButton.WithCallbackData("-", $"Buy {request.DishId} {request.Count - 1}"),
-            //        new InlineKeyboardButton($"{request.Count}"),
-            //        InlineKeyboardButton.WithCallbackData("+", $"Buy {request.DishId} {request.Count + 1}"),
-            //    },
+            var countControls = new Dictionary<string, string>();
+            if (request.Count > 0)
+            {
+                countControls.Add("-", $"Buy {request.DishId} {request.Count - 1} Navigation");
+            }
+            else
+            {
+                countControls.Add($" ", "#");
+            }
+            countControls.Add($"{request.Count}", "#");
+            if (request.Count < 8)
+            {
+                countControls.Add("+", $"Buy {request.DishId} {request.Count + 1} Navigation");
 
-            //    new []
-            //    {
-            //        InlineKeyboardButton.WithCallbackData("Підтвердити", "Confirm"),
-            //        InlineKeyboardButton.WithCallbackData("Відмінити", "Cancel"),
-            //    },
-            //};
+            }
+            else
+            {
+                countControls.Add($" ", "#");
+            }
 
             var buttons = new Dictionary<string, string>[]
             {
+                countControls,
+
                 new Dictionary<string, string>
                 {
-                    { "Головна", "Main" },
+                    { "Підтвердити", $"Confirm {request.DishId} {request.Count}" },
+                    { "Відмінити", "Cancel" },
                 },
             };
             var markup = new InlineReplyMarkup(buttons);
-            return markup;  
+            return markup;
         }
     }
 }

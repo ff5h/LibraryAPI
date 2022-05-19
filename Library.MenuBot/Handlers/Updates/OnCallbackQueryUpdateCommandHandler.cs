@@ -19,6 +19,16 @@ namespace Library.MenuBot.Handlers.Updates
             string[] splittedCallbackQueryData = callbackQueryData.Split(' ');
             bool result = splittedCallbackQueryData[0] switch
             {
+                "Main" => await _sender.Send(new StartActionCommand()
+                {
+                    Message = request.CallbackQuery.Message,
+                }),
+
+                "Confirm" => await _sender.Send(new AddDishToBasketCallbackQueryActionCommand()
+                {
+                    CallbackQuery = request.CallbackQuery,
+                }),
+
                 "Menu" => await _sender.Send(new MenuCallbackQueryActionCommand()
                 {
                     CallbackQuery = request.CallbackQuery,

@@ -18,7 +18,7 @@ namespace Library.MenuBot.Handlers.Actions.Messages
             long userId = request.Message.UserId;
             int messageId = request.Message.Id;
             string text = "Напишіть \"/start\" щоб почати";
-            await _telegramService.RefreshMessageAsync(userId, messageId, text);
+            await _telegramService.RefreshTextMessageAsync(userId, messageId, text);
             return true;
         }
     }

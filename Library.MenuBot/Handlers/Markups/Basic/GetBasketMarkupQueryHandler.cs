@@ -13,7 +13,7 @@ namespace Library.MenuBot.Handlers.Markups.Basic
             {
                 new Dictionary<string, string>
                 {
-                    { "Купити", "Buy" },
+                    { "Купити", "AddBasket" },
                 },
 
                 new Dictionary<string, string>

@@ -34,7 +34,7 @@ namespace LibraryAPI.Migrations
 
                     b.HasIndex("DishesId");
 
-                    b.ToTable("BasketDish");
+                    b.ToTable("BasketDish", (string)null);
                 });
 
             modelBuilder.Entity("Library.Repository.Models.Attachment", b =>
@@ -53,7 +53,7 @@ namespace LibraryAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Attachments");
+                    b.ToTable("Attachments", (string)null);
                 });
 
             modelBuilder.Entity("Library.Repository.Models.Basket", b =>
@@ -69,7 +69,7 @@ namespace LibraryAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Baskets");
+                    b.ToTable("Baskets", (string)null);
                 });
 
             modelBuilder.Entity("Library.Repository.Models.Dish", b =>
@@ -102,7 +102,7 @@ namespace LibraryAPI.Migrations
 
                     b.HasIndex("PhotoId");
 
-                    b.ToTable("Dishes");
+                    b.ToTable("Dishes", (string)null);
                 });
 
             modelBuilder.Entity("Library.Repository.Models.DishCategory", b =>
@@ -119,7 +119,7 @@ namespace LibraryAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DishCategories");
+                    b.ToTable("DishCategories", (string)null);
                 });
 
             modelBuilder.Entity("Library.Repository.Models.User", b =>
@@ -132,7 +132,7 @@ namespace LibraryAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("BasketDish", b =>
