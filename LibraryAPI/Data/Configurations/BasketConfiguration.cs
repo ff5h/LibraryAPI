@@ -15,8 +15,8 @@ namespace LibraryAPI.Data.Configurations
                 .IsRequired(true);
 
             builder
-                .HasMany(b => b.Dishes)
-                .WithMany(d => d.Baskets);
+                .HasMany(b => b.Orders)
+                .WithOne(d => d.Basket);
         }
     }
 }

@@ -22,21 +22,6 @@ namespace LibraryAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BasketDish", b =>
-                {
-                    b.Property<int>("BasketsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DishesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BasketsId", "DishesId");
-
-                    b.HasIndex("DishesId");
-
-                    b.ToTable("BasketDish", (string)null);
-                });
-
             modelBuilder.Entity("Library.Repository.Models.Attachment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -53,7 +38,7 @@ namespace LibraryAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Attachments", (string)null);
+                    b.ToTable("Attachments");
                 });
 
             modelBuilder.Entity("Library.Repository.Models.Basket", b =>
@@ -69,7 +54,7 @@ namespace LibraryAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Baskets", (string)null);
+                    b.ToTable("Baskets");
                 });
 
             modelBuilder.Entity("Library.Repository.Models.Dish", b =>
@@ -102,7 +87,7 @@ namespace LibraryAPI.Migrations
 
                     b.HasIndex("PhotoId");
 
-                    b.ToTable("Dishes", (string)null);
+                    b.ToTable("Dishes");
                 });
 
             modelBuilder.Entity("Library.Repository.Models.DishCategory", b =>
@@ -119,7 +104,36 @@ namespace LibraryAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DishCategories", (string)null);
+                    b.ToTable("DishCategories");
+                });
+
+            modelBuilder.Entity("Library.Repository.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BasketId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DishCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DishId")
+                        .HasColumnType("int");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
+
+                    b.HasIndex("DishId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Library.Repository.Models.User", b =>
@@ -132,22 +146,7 @@ namespace LibraryAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
-                });
-
-            modelBuilder.Entity("BasketDish", b =>
-                {
-                    b.HasOne("Library.Repository.Models.Basket", null)
-                        .WithMany()
-                        .HasForeignKey("BasketsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Library.Repository.Models.Dish", null)
-                        .WithMany()
-                        .HasForeignKey("DishesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Library.Repository.Models.Dish", b =>
@@ -167,6 +166,30 @@ namespace LibraryAPI.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Photo");
+                });
+
+            modelBuilder.Entity("Library.Repository.Models.Order", b =>
+                {
+                    b.HasOne("Library.Repository.Models.Basket", "Basket")
+                        .WithMany("Orders")
+                        .HasForeignKey("BasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Library.Repository.Models.Dish", "Dish")
+                        .WithMany()
+                        .HasForeignKey("DishId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Basket");
+
+                    b.Navigation("Dish");
+                });
+
+            modelBuilder.Entity("Library.Repository.Models.Basket", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

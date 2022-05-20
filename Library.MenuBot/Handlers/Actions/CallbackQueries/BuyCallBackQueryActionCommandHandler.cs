@@ -55,6 +55,7 @@ namespace Library.MenuBot.Handlers.Actions.CallbackQueries
             {
                 await _telegramService.EditReplyMarkupAsync(userId, messageId, text, replyMarkup);
             }
+
             return true;
         }
     }

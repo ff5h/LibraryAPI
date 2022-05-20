@@ -22,7 +22,7 @@ namespace Library.MenuBot.Handlers.Actions.Messages
             int messageId = request.Message.Id;
             string text = "Оберіть категорію:";
             var replyMarkup = await _sender.Send(new GetCategoriesMarkupQuery());
-            await _telegramService.RefreshTextMessageAsync(userId, messageId, text, replyMarkup);
+            await _telegramService.RefreshTextMessageAsync(userId, messageId, text, replyMarkup: replyMarkup);
             return true;
         }
     }

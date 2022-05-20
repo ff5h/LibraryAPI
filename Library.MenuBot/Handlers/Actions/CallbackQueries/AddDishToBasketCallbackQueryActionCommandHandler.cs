@@ -1,4 +1,5 @@
 ﻿using Library.MenuBot.Commands.Actions.CallbackQueries;
+using Library.MenuBot.Commands.Actions.Messages;
 using Library.Repository.Interfaces;
 using Library.Repository.Models;
 using Library.Shared.Interfaces.Services;
@@ -26,31 +27,45 @@ namespace Library.MenuBot.Handlers.Actions.CallbackQueries
 
         public async Task<bool> Handle(AddDishToBasketCallbackQueryActionCommand request, CancellationToken cancellationToken)
         {
-            //string callbackQueryData = request.CallbackQuery.Data;
-            //string[] splittedCallbackQueryData = callbackQueryData.Split(' ');
-            //int dishId = int.Parse(splittedCallbackQueryData[1]);
-            //int count = int.Parse(splittedCallbackQueryData[2]);
-
-            //long userId = request.CallbackQuery.Message.UserId;
-            //var basket = await _ctx.Baskets.Include(b => b.Dishes).FirstOrDefaultAsync(b => b.UserId == userId);
-            //if (basket == null)
-            //{
-            //    basket = new Basket()
-            //    {
-            //        UserId = userId,
-            //        Dishes = new List<Dish>()
-            //    };
-            //    _ctx.Baskets.Add(basket);
-            //}
-            //var dish = await _ctx.Dishes.FirstOrDefaultAsync(d => d.Id == dishId);
-            //if (dish == null)
-            //   return false;
-            //for (int i = 0; i <= count; i++)
-            //{
-            //    basket.Dishes.Add(dish);
-            //}
-
-            //await _ctx.SaveChangesAsync();
+            string callbackQueryData = request.CallbackQuery.Data;
+            string[] splittedCallbackQueryData = callbackQueryData.Split(' ');
+            int dishId = int.Parse(splittedCallbackQueryData[1]);
+            int count = int.Parse(splittedCallbackQueryData[2]);
+            long userId = request.CallbackQuery.Message.UserId;
+            var dish = await _ctx.Dishes.FirstOrDefaultAsync(d => d.Id == dishId);
+            if (dish == null)
+                return false;
+            var order = await _ctx.Orders.FirstOrDefaultAsync(o => o.UserId == userId && o.DishId == dishId);
+            if (order == null)
+            {
+                order = new Order()
+                {
+                    UserId = userId,
+                    DishId = dish.Id,
+                    DishCount = count
+                };
+                var basket = await _ctx.Baskets.Include(b => b.Orders).FirstOrDefaultAsync(b => b.UserId == userId);
+                if (basket == null)
+                {
+                    basket = new Basket()
+                    {
+                        UserId = userId,
+                        Orders = new List<Order>()
+                    };
+                    _ctx.Baskets.Add(basket);
+                }
+                basket.Orders.Add(order);
+            }
+            else
+            {
+                order.DishCount += count;
+                _ctx.Orders.Update(order);
+            }
+            await _ctx.SaveChangesAsync();
+            await _sender.Send(new MenuActionCommand()
+            {
+                Message = request.CallbackQuery.Message,
+            });
             return true;
         }
     }

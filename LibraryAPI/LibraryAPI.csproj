@@ -28,4 +28,8 @@
     <ProjectReference Include="..\Library.Repository\Library.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

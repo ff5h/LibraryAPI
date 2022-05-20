@@ -69,13 +69,13 @@ namespace Library.MenuBot.Services
             }
         }
 
-        public async Task<bool> RefreshTextMessageAsync(long userId, int messageId, string text, IMarkup replyMarkup = null)
+        public async Task<bool> RefreshTextMessageAsync(long userId, int messageId, string text, IFileInfo<Guid> photo = null, IMarkup replyMarkup = null)
         {
             try
             {
                 await DeleteMessageAsync(userId, messageId);
                 await DeleteMessageAsync(userId, await _userService.GetUserMessageId(userId));
-                await PushMessageAsync(userId, text, replyMarkup: replyMarkup);
+                await PushMessageAsync(userId, text, photo, replyMarkup);
                 return true;
             }
             catch

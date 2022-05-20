@@ -10,6 +10,5 @@
         public Guid PhotoId { get; set; }
         public DishCategory Category { get; set; }
         public Attachment Photo { get; set; }
-        public ICollection<Basket> Baskets { get; set; }
     }
 }

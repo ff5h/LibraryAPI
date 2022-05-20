@@ -34,6 +34,11 @@ namespace Library.MenuBot.Handlers.Updates
                     CallbackQuery = request.CallbackQuery,
                 }),
 
+                "Clear" => await _sender.Send(new ClearBasketCallbackQueryActionCommand()
+                {
+                    CallbackQuery = request.CallbackQuery,
+                }),
+
                 "Basket" => await _sender.Send(new BasketCallbackQueryActionCommand()
                 {
                     CallbackQuery = request.CallbackQuery,
@@ -48,6 +53,16 @@ namespace Library.MenuBot.Handlers.Updates
                 {
                     Message = request.CallbackQuery.Message,
                 }),
+
+                "Remove" => await _sender.Send(new RemoveOrderCallbackQueryActionCommand()
+                {
+                    CallbackQuery = request.CallbackQuery,
+                }),
+
+                "Finish" => await _sender.Send(new FinishOrderCallbackQueryActionCommand()
+                {
+                    CallbackQuery = request.CallbackQuery,
+                }),  
             };
             return result;
         }

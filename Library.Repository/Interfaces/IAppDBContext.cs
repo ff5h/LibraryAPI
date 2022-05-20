@@ -10,6 +10,7 @@ namespace Library.Repository.Interfaces
         public DbSet<Dish> Dishes { get; }
         public DbSet<Basket> Baskets { get; }
         public DbSet<User> Users { get; }
+        public DbSet<Order> Orders { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
     }

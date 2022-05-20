@@ -60,6 +60,12 @@ namespace Library.MenuBot.Handlers.Actions.CallbackQueries
                 messageId = await _userService.GetUserMessageId(userId);
                 await _telegramService.EditMessageAsync(userId, messageId, text, photo, replyMarkup);
             }
+
+            if (source == "Cancel") //From GetBuyMarkupQueryHandler
+            {
+                messageId = await _userService.GetUserMessageId(userId);
+                await _telegramService.EditMessageAsync(userId, messageId, text, photo, replyMarkup);
+            }
             return true;
         }
     }

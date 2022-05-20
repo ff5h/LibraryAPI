@@ -16,6 +16,7 @@ namespace LibraryAPI.Data
             builder.ApplyConfiguration(new AttachmentConfiguration());
             builder.ApplyConfiguration(new BasketConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new OrderConfiguration());
         }
 
         public DbSet<DishCategory> DishCategories { get; private set; }
@@ -23,5 +24,7 @@ namespace LibraryAPI.Data
         public DbSet<Dish> Dishes { get; private set; }
         public DbSet<Basket> Baskets { get; private set; }
         public DbSet<User> Users { get; private set; }
+        public DbSet<Order> Orders { get; private set; }
+
     }
 }

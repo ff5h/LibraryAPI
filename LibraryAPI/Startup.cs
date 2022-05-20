@@ -23,7 +23,7 @@ namespace LibraryAPI
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAppDBContext>(provider => provider.GetService<AppDBContext>());
 
-            services.AddScoped<ILiteDatabase>(_ => new LiteDatabase(_configuration.GetConnectionString("NoSQLConnection")));
+            services.AddSingleton<ILiteDatabase>(_ => new LiteDatabase(_configuration.GetConnectionString("NoSQLConnection")));
             services.AddScoped<IDataStorageService<Guid>, DataStorageService>();
             services.AddScoped<IUserService, UserService>();
 
